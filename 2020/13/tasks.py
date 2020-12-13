@@ -1,4 +1,4 @@
-from functools import reduce
+from itertools import count
 
 
 def test_task_one():
@@ -21,16 +21,6 @@ def task_one(filename):
     return (best_time - earliest_time) * next_bus
 
 
-def chinese_remainder(n, a):
-    # from https://rosettacode.org/wiki/Chinese_remainder_theorem#Python, but modified to use pow
-    total = 0
-    prod = reduce(lambda a, b: a*b, n)
-    for n_i, a_i in zip(n, a):
-        p = prod // n_i
-        total += a_i * pow(p, -1, n_i) * p
-    return total % prod
-
-
 def test_task_two():
     assert 1068781 == task_two('test-data.txt')
     assert 906332393333683 == task_two('real-data.txt')
@@ -38,15 +28,17 @@ def test_task_two():
 
 def task_two(filename):
     earliest_time, bus_schedule = [line.strip('\n') for line in open(filename)]
-    buses = bus_schedule.split(',')
-    divisors = []
-    remainders = []
-    for index in range(len(buses)):
-        if buses[index] != "x":
-            divisors.append(int(buses[index]))
-            remainders.append(int(buses[index]) - index)
-    return chinese_remainder(divisors, remainders)
-
-
-
-
+    buses = {
+        int(bus): offset
+        for offset, bus in enumerate(bus_schedule.split(','))
+        if bus != 'x'
+    }
+    buses = sorted(buses.items(), reverse=True)  # start with our biggest values to go through fewer iterations
+    start, step = 0, 1
+    for bus, offset in buses:
+        for time in count(start, step):  # go through our times until we a factor
+            if (time + offset) % bus == 0:  # found a factor
+                start = time  # reset our start time for the next bus at our current time
+                step *= bus  # set our steps to remain a factor for all previous buses
+                break
+    return time
