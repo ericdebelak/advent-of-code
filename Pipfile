@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-xdist = "*"
+pytest-mock = "*"
+pytest-cov = "*"
+bpython = "*"
+pylint = "*"
+pycodestyle = "*"
+
+[packages]
+
+[requires]
+python_version = "3.8"
