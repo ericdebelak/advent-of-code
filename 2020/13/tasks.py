@@ -36,7 +36,7 @@ def task_two(filename):
     buses = sorted(buses.items(), reverse=True)  # start with our biggest values to go through fewer iterations
     start, step = 0, 1
     for bus, offset in buses:
-        for time in count(start, step):  # go through our times until we a factor
+        for time in count(start, step):  # go through our times until we find a factor
             if (time + offset) % bus == 0:  # found a factor
                 start = time  # reset our start time for the next bus at our current time
                 step *= bus  # set our steps to remain a factor for all previous buses
