@@ -10,9 +10,8 @@ def task_one(filename):
     count_of_one = 0
     # our device always has a difference of three, so we'll start with a count of 1
     count_of_three = 1
-    for index in range(len(lines)):
+    for index, current_number in enumerate(lines):
         previous_number = 0 if index == 0 else lines[index - 1]
-        current_number = lines[index]
         diff = current_number - previous_number
         if diff == 1:
             count_of_one += 1
