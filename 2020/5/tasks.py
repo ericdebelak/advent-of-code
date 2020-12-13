@@ -12,8 +12,7 @@ def _get_seat_number(boarding_pass):
     row_upper = 127
     seat_upper = 7
     row_lower = seat_lower = final_row = 0
-    for index in range(len(boarding_pass)):
-        char = boarding_pass[index]
+    for index, char in enumerate(boarding_pass):
         if index == 6:
             final_row = row_lower if char == 'F' else row_upper
         elif index == 9:
