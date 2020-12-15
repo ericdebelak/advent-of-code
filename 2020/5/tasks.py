@@ -18,18 +18,17 @@ def _get_seat_number(boarding_pass):
         elif index == 9:
             final_seat = seat_lower if char == 'L' else seat_upper
             return final_row * 8 + final_seat
-        elif char == 'F':
-            row_upper = math.floor(_get_middle(row_lower, row_upper))
-        elif char == 'B':
-            row_lower = round(_get_middle(row_lower, row_upper))
-        elif char == 'L':
-            seat_upper = math.floor(_get_middle(seat_lower, seat_upper))
-        elif char == 'R':
-            seat_lower = round(_get_middle(seat_lower, seat_upper))
+        elif char in ['F', 'B']:
+            row_lower, row_upper = _get_new_bounds(row_lower, row_upper, char)
+        else:
+            seat_lower, seat_upper = _get_new_bounds(seat_lower, seat_upper, char)
 
 
-def _get_middle(lower, upper):
-    return lower + (upper - lower) / 2
+def _get_new_bounds(lower, upper, direction):
+    if direction in ['F', 'L']:
+        return lower, lower + math.floor((upper - lower) / 2)
+    else:
+        return upper - math.floor((upper - lower) / 2), upper
 
 
 def test_task_one():
