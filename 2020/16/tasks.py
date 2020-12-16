@@ -142,9 +142,9 @@ def task_two(filename):
         my_ticket = [int(x) for x in my_ticket.splitlines()[1].split(',')]
         valid_numbers = _build_valid_numbers(rules)
         valid_tickets = _remove_invalid_tickets(valid_numbers, other_tickets)
-        column_graph = _build_index_graph(valid_tickets)
-        rule_columns = _build_rule_columns_graph(rules, column_graph)
-        simplified_rule_columns = _simplify_rule_columns(rule_columns)
+        column_graph = _build_index_graph(valid_tickets)  # build a graph of all values from each column
+        rule_columns = _build_rule_columns_graph(rules, column_graph)  # which rules can be satisfied with which columns
+        simplified_rule_columns = _simplify_rule_columns(rule_columns)  # simplify until 1 column is satisfied per rule
         departure_rule_indexes = [index for index, rule in enumerate(rules.splitlines()) if 'departure' in rule]
         total = 1
         for index in departure_rule_indexes:
