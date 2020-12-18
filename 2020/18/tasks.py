@@ -1,3 +1,6 @@
+from copy import copy
+
+
 def test_break_into_groups():
     assert ['1', '+', ['2', '*', '3'],  '+', ['4',  '*',  ['5', '+', '6']]] == _break_into_groups(
         '1 + (2 * 3) + (4 * (5 + 6))'
@@ -29,17 +32,13 @@ def test_evaluate_line():
 
 
 def _evaluate_line(line):
-    total = 0
-    current_index = 0
+    total = _get_item(line[0])  # init to first item
+    current_index = 1  # since we have the first item, start at index 1
     while current_index + 1 < len(line):
         item = _get_item(line[current_index])
-        if _is_int(item) and current_index < 3:
-            third_item = _get_item(line[current_index+2])
-            total = eval(f'{item}{line[current_index + 1]}{third_item}')
-            current_index += 3
-        elif not _is_int(item) and current_index >= 3:
+        if not _is_int(item):  # only do operations if we don't have an int
             next_item = _get_item(line[current_index + 1])
-            total = eval(f'{total}{line[current_index]}{next_item}')
+            total = eval(f'{total}{item}{next_item}')
             current_index += 2
         else:
             current_index += 1
@@ -73,3 +72,36 @@ def task_one(filename):
     return total
 
 
+def test_add_then_multiply():
+    assert 9 == _add_then_multiply(['1', '+', '2', '*', '3'])
+    assert 36 == _add_then_multiply(['1', '+', '2', '*', '3', '*', '3', '+', '1'])
+    assert 28 == _add_then_multiply(['1', '+', ['2', '*', '3'], '*', '3', '+', '1'])
+
+
+def _add_then_multiply(line):
+    new_line = copy(line)
+    for index, char in enumerate(line):
+        if char == '+' or (char == '*' and '+' not in line):
+            first = _get_item_only_add(line[index - 1])
+            second = _get_item_only_add(line[index + 1])
+            new_line = line[0:index - 1] + [eval(f'{first}{char}{second}')] + line[index + 2:]
+            return _add_then_multiply(new_line)
+    return int(new_line[0])
+
+
+def _get_item_only_add(item):
+    if isinstance(item, list):
+        item = _add_then_multiply(item)
+    return item
+
+
+def test_task_two():
+    assert 119224703255966 == task_two('real-data.txt')
+
+
+def task_two(filename):
+    total = 0
+    lines = [line.strip('\n') for line in open(filename)]
+    for line in lines:
+        total += _add_then_multiply(_break_into_groups(line))
+    return total
