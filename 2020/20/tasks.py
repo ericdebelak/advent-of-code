@@ -96,6 +96,7 @@ def task_one(filename):
         tiles, all_sides = _parse_tiles(file)
         corners = []
         for tile_id, tile in tiles.items():
+            # corners with have all their side possibilities match, plus 2 and their reverses, so 12 matches
             if _find_matches(tile, all_sides) == 12:
                 corners.append(int(tile_id))
         return prod(corners)
