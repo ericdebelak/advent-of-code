@@ -60,8 +60,8 @@ def _is_int(x):
 
 
 def test_task_one():
-    assert 122 == task_one('test-data.txt')
-    assert 1402255785165 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 122
+    assert task_one('real-data.txt') == 1402255785165
 
 
 def task_one(filename):
@@ -73,9 +73,9 @@ def task_one(filename):
 
 
 def test_add_then_multiply():
-    assert 9 == _add_then_multiply(['1', '+', '2', '*', '3'])
-    assert 36 == _add_then_multiply(['1', '+', '2', '*', '3', '*', '3', '+', '1'])
-    assert 28 == _add_then_multiply(['1', '+', ['2', '*', '3'], '*', '3', '+', '1'])
+    assert _add_then_multiply(['1', '+', '2', '*', '3']) == 9
+    assert _add_then_multiply(['1', '+', '2', '*', '3', '*', '3', '+', '1']) == 36
+    assert _add_then_multiply(['1', '+', ['2', '*', '3'], '*', '3', '+', '1']) == 28
 
 
 def _add_then_multiply(line):
@@ -96,7 +96,7 @@ def _get_item_only_add(item):
 
 
 def test_task_two():
-    assert 119224703255966 == task_two('real-data.txt')
+    assert task_two('real-data.txt') == 119224703255966
 
 
 def task_two(filename):

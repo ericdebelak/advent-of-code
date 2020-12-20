@@ -2,8 +2,8 @@ from copy import deepcopy
 
 
 def test_task_one():
-    assert 5 == task_one('test-data.txt')
-    assert 1753 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 5
+    assert task_one('real-data.txt') == 1753
 
 
 def task_one(filename):
@@ -18,9 +18,9 @@ def task_one(filename):
 
 
 def test_execute_line():
-    assert 1, 0 == _execute_line(0, 0, ['nop +0'])
-    assert 3, 0 == _execute_line(0, 0, ['jmp +3'])
-    assert 1, 5 == _execute_line(0, 0, ['acc +5'])
+    assert _execute_line(0, 0, ['nop +0']) ==  (1, 0)
+    assert _execute_line(0, 0, ['jmp +3']) ==  (3, 0)
+    assert _execute_line(0, 0, ['acc +5']) ==  (1, 5)
 
 
 def _execute_line(position, acc_value, lines):
@@ -31,8 +31,8 @@ def _execute_line(position, acc_value, lines):
 
 
 def test_correct_corrupted_line():
-    assert 'nop +3' == _correct_corrupted_line('jmp +3')
-    assert 'jmp -3' == _correct_corrupted_line('nop -3')
+    assert _correct_corrupted_line('jmp +3') == 'nop +3'
+    assert _correct_corrupted_line('nop -3') == 'jmp -3'
 
 
 def _correct_corrupted_line(line):
@@ -58,8 +58,8 @@ def _line_is_valid(lines):
 
 
 def test_task_two():
-    assert 8 == task_two('test-data.txt')
-    assert 733 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 8
+    assert task_two('real-data.txt') == 733
 
 
 def task_two(filename):

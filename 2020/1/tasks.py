@@ -1,6 +1,6 @@
 def test_task_one():
-    assert 514579 == task_one('test-data.txt')
-    assert 1014624 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 514579
+    assert task_one('real-data.txt') == 1014624
 
 
 def task_one(filename):
@@ -12,8 +12,8 @@ def task_one(filename):
 
 
 def test_task_two():
-    assert 241861950 == task_two('test-data.txt')
-    assert 80072256 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 241861950
+    assert task_two('real-data.txt') == 80072256
 
 
 def task_two(filename):

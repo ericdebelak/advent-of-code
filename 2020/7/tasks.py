@@ -12,8 +12,8 @@ def _bag_check(lines, bags_that_work):
 
 
 def test_task_one():
-    assert 4 == task_one('test-data.txt')
-    assert 169 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 4
+    assert task_one('real-data.txt') == 169
 
 
 def task_one(filename):
@@ -29,14 +29,14 @@ def task_one(filename):
 
 
 def test_get_children_bags_with_count():
-    assert 13, {
+    assert _get_children_bags_with_count(
+        '3 dotted magenta bags, 2 shiny beige bags, 3 plaid brown bags, 5 clear indigo bags.'
+    ) == (13, {
         'clear indigo bag': 5,
         'dotted magenta bag': 3,
         'plaid brown bag': 3,
         'shiny beige bag': 2,
-    } == _get_children_bags_with_count(
-        '3 dotted magenta bags, 2 shiny beige bags, 3 plaid brown bags, 5 clear indigo bags.'
-    )
+    })
 
 
 def _get_children_bags_with_count(bag_string):
@@ -54,7 +54,7 @@ def test_build_graph():
     text = '''light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.'''
     lines = text.splitlines()
-    assert {
+    assert _build_graph(lines) == {
         'dark orange bag': {
             'children': {
                 'bright white bag': 3,
@@ -69,7 +69,7 @@ dark orange bags contain 3 bright white bags, 4 muted yellow bags.'''
             },
             'count': 3
         }
-    } == _build_graph(lines)
+    }
 
 
 def _build_graph(lines):
@@ -93,9 +93,9 @@ def _get_total_recursive(bag_graph, parent_name, child_name, total=0, modifier=1
 
 
 def test_task_two():
-    assert 32 == task_two('test-data.txt')
-    assert 126 == task_two('test-data-two.txt')
-    assert 82372 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 32
+    assert task_two('test-data-two.txt') == 126
+    assert task_two('real-data.txt') == 82372
 
 
 def task_two(filename):

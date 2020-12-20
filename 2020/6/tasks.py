@@ -1,7 +1,7 @@
 def test_get_question_count():
-    assert 3 == _get_question_count('a\nb\nc')
-    assert 3 == _get_question_count('abc')
-    assert 3 == _get_question_count('ab\nac')
+    assert _get_question_count('a\nb\nc') == 3
+    assert _get_question_count('abc') == 3
+    assert _get_question_count('ab\nac') == 3
 
 
 def _get_question_count(text):
@@ -14,8 +14,8 @@ def _get_question_count(text):
 
 
 def test_task_one():
-    assert 11 == task_one('test-data.txt')
-    assert 6683 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 11
+    assert task_one('real-data.txt') == 6683
 
 
 def task_one(filename):
@@ -28,12 +28,12 @@ def task_one(filename):
 
 
 def test_get_same_question_count():
-    assert 0 == _get_same_question_count('a\nb\nc')
-    assert 3 == _get_same_question_count('abc')
-    assert 1 == _get_same_question_count('ab\nac')
-    assert 1 == _get_question_count('a\na\na\na')
-    assert 1 == _get_same_question_count('b')
-    assert 0 == _get_same_question_count('icb\nxqhf')
+    assert _get_same_question_count('a\nb\nc') == 0
+    assert _get_same_question_count('abc') == 3
+    assert _get_same_question_count('ab\nac') == 1
+    assert _get_question_count('a\na\na\na') == 1
+    assert _get_same_question_count('b') == 1
+    assert _get_same_question_count('icb\nxqhf') == 0
 
 
 def _get_same_question_count(text):
@@ -47,8 +47,8 @@ def _get_same_question_count(text):
 
 
 def test_task_two():
-    assert 6 == task_two('test-data.txt')
-    assert 3122 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 6
+    assert task_two('real-data.txt') == 3122
 
 
 def task_two(filename):

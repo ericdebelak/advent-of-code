@@ -3,8 +3,8 @@ from copy import deepcopy
 
 
 def test_task_one():
-    assert 112 == task_one('test-data.txt')
-    assert 382 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 112
+    assert task_one('real-data.txt') == 382
 
 
 def task_one(filename):
@@ -71,9 +71,9 @@ def test_check_neighbors():
         '0,-1,0': True,
         '1,-1,0': True,
     }
-    assert 5 == _count_neighbors('0,0,0', graph)
-    assert 2 == _count_neighbors('1,1,0', graph)
-    assert 3 == _count_neighbors('0,-1,0', graph)
+    assert _count_neighbors('0,0,0', graph) == 5
+    assert _count_neighbors('1,1,0', graph) == 2
+    assert _count_neighbors('0,-1,0', graph) == 3
 
 
 def _count_neighbors(key, graph):
@@ -91,8 +91,8 @@ def _count_neighbors(key, graph):
 
 
 def test_task_two():
-    assert 848 == task_two('test-data.txt')
-    assert 2552 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 848
+    assert task_two('real-data.txt') == 2552
 
 
 def task_two(filename):

@@ -13,8 +13,8 @@ REQ_FIELDS = {
 
 
 def test_task_one():
-    assert 2 == task_one('test-data.txt')
-    assert 233 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 2
+    assert task_one('real-data.txt') == 233
 
 
 def task_one(filename):
@@ -36,9 +36,9 @@ def _check_for_required(fields):
 
 
 def test_task_two():
-    assert 0 == task_two('invalid-passports.txt')
-    assert 4 == task_two('valid-passports.txt')
-    assert 111 == task_two('real-data.txt')
+    assert task_two('invalid-passports.txt') == 0
+    assert task_two('valid-passports.txt') == 4
+    assert task_two('real-data.txt') == 111
 
 
 def task_two(filename):

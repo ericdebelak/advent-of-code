@@ -2,10 +2,10 @@ import math
 
 
 def test_get_seat_number():
-    assert 357 == _get_seat_number('FBFBBFFRLR')
-    assert 567 == _get_seat_number('BFFFBBFRRR')
-    assert 119 == _get_seat_number('FFFBBBFRRR')
-    assert 820 == _get_seat_number('BBFFBBFRLL')
+    assert _get_seat_number('FBFBBFFRLR') == 357
+    assert _get_seat_number('BFFFBBFRRR') == 567
+    assert _get_seat_number('FFFBBBFRRR') == 119
+    assert _get_seat_number('BBFFBBFRLL') == 820
 
 
 def _get_seat_number(boarding_pass):
@@ -32,8 +32,8 @@ def _get_new_bounds(lower, upper, direction):
 
 
 def test_task_one():
-    assert 820 == task_one('test-data.txt')
-    assert 959 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 820
+    assert task_one('real-data.txt') == 959
 
 
 def task_one(filename):
@@ -41,7 +41,7 @@ def task_one(filename):
 
 
 def test_task_two():
-    assert 527 == task_two('real-data.txt')
+    assert task_two('real-data.txt') == 527
 
 
 def task_two(filename):

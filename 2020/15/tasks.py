@@ -1,12 +1,12 @@
 def test_task_one():
-    assert 436 == task_one([0, 3, 6])
-    assert 1 == task_one([1, 3, 2])
-    assert 10 == task_one([2, 1, 3])
-    assert 27 == task_one([1, 2, 3])
-    assert 78 == task_one([2, 3, 1])
-    assert 438 == task_one([3, 2, 1])
-    assert 1836 == task_one([3, 1, 2])
-    assert 1428 == task_one([2, 0, 6, 12, 1, 3])  # my puzzle input
+    assert task_one([0, 3, 6]) == 436
+    assert task_one([1, 3, 2]) == 1
+    assert task_one([2, 1, 3]) == 10
+    assert task_one([1, 2, 3]) == 27
+    assert task_one([2, 3, 1]) == 78
+    assert task_one([3, 2, 1]) == 438
+    assert task_one([3, 1, 2]) == 1836
+    assert task_one([2, 0, 6, 12, 1, 3]) == 1428  # my puzzle input
 
 
 def task_one(starting_numbers, end=2020):
@@ -29,5 +29,5 @@ def task_one(starting_numbers, end=2020):
 
 
 def test_task_two():
-    assert 175594 == task_one([0, 3, 6], 30000000)
-    assert 3718541 == task_one([2, 0, 6, 12, 1, 3], 30000000)  # my puzzle input
+    assert task_one([0, 3, 6], 30000000) == 175594
+    assert task_one([2, 0, 6, 12, 1, 3], 30000000) == 3718541  # my puzzle input

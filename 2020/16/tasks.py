@@ -53,10 +53,10 @@ def _find_invalid_numbers(valid_numbers, text):
 
 
 def test_remove_invalid_tickets():
-    assert [[1, 6, 3], [7, 5, 1]] == _remove_invalid_tickets(
+    assert _remove_invalid_tickets(
         [1, 2, 3, 4, 5, 6, 7],
         'nearby tickets:\n1,6,3\n7,3,47\n7,5,1'
-    )
+    ) == [[1, 6, 3], [7, 5, 1]]
 
 
 def _remove_invalid_tickets(valid_numbers, text):
@@ -70,10 +70,10 @@ def _remove_invalid_tickets(valid_numbers, text):
 
 
 def test_build_index_graph():
-    assert {
+    assert _build_index_graph([[6, 45], [8, 78]]) == {
         0: [6, 8],
         1: [45, 78]
-    } == _build_index_graph([[6, 45], [8, 78]])
+    }
 
 
 def _build_index_graph(tickets):
@@ -133,7 +133,7 @@ def _simplify_rule_columns(rule_columns):
 
 
 def test_task_two():
-    assert 6766503490793 == task_two('real-data.txt')
+    assert task_two('real-data.txt') == 6766503490793
 
 
 def task_two(filename):

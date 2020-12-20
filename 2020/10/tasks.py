@@ -1,7 +1,7 @@
 def test_task_one():
-    assert 7 * 5 == task_one('test-data-one.txt')
-    assert 22 * 10 == task_one('test-data-two.txt')
-    assert 2070 == task_one('real-data.txt')
+    assert task_one('test-data-one.txt') == 7 * 5
+    assert task_one('test-data-two.txt') == 22 * 10
+    assert task_one('real-data.txt') == 2070
 
 
 def task_one(filename):
@@ -21,7 +21,7 @@ def task_one(filename):
 
 
 def test_build_graph():
-    assert {
+    assert _build_graph([0, 1, 4, 5, 6, 7, 10, 11, 12, 15, 16, 19, 22]) == {
         0: [1],
         1: [4],
         4: [5, 6, 7],
@@ -35,7 +35,7 @@ def test_build_graph():
         16: [19],
         19: [22],
         22: []
-    } == _build_graph([0, 1, 4, 5, 6, 7, 10, 11, 12, 15, 16, 19, 22])
+    }
 
 
 def _build_graph(adapters):
@@ -63,7 +63,7 @@ def test_count_paths():
         19: [22],
         22: []
     }
-    assert {
+    assert _count_paths(graph) == {
         0: 1,
         1: 1,
         4: 1,
@@ -77,7 +77,7 @@ def test_count_paths():
         16: 8,
         19: 8,
         22: 8
-    } == _count_paths(graph)
+    }
 
 
 # for each adapter, count how many possible paths to reach it
@@ -94,9 +94,9 @@ def _count_paths(graph):
 
 
 def test_task_two():
-    assert 8 == task_two('test-data-one.txt')
-    assert 19208 == task_two('test-data-two.txt')
-    assert 24179327893504 == task_two('real-data.txt')
+    assert task_two('test-data-one.txt') == 8
+    assert task_two('test-data-two.txt') == 19208
+    assert task_two('real-data.txt') == 24179327893504
 
 
 def task_two(filename):

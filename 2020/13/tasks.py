@@ -2,8 +2,8 @@ from itertools import count
 
 
 def test_task_one():
-    assert 295 == task_one('test-data.txt')
-    assert 2382 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 295
+    assert task_one('real-data.txt') == 2382
 
 
 def task_one(filename):
@@ -22,8 +22,8 @@ def task_one(filename):
 
 
 def test_task_two():
-    assert 1068781 == task_two('test-data.txt')
-    assert 906332393333683 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 1068781
+    assert task_two('real-data.txt') == 906332393333683
 
 
 def task_two(filename):

@@ -3,12 +3,12 @@ TURNS = ['R', 'L']
 
 
 def test_rotate():
-    assert (1, -10) == _rotate('R', 90, 10, 1)
-    assert (-1, 10) == _rotate('L', 90, 10, 1)
-    assert (-10, -1) == _rotate('R', 180, 10, 1)
-    assert (-10, -1) == _rotate('L', 180, 10, 1)
-    assert (1, -10) == _rotate('L', 270, 10, 1)
-    assert (-1, 10) == _rotate('R', 270, 10, 1)
+    assert _rotate('R', 90, 10, 1) == (1, -10)
+    assert _rotate('L', 90, 10, 1) == (-1, 10)
+    assert _rotate('R', 180, 10, 1) == (-10, -1)
+    assert _rotate('L', 180, 10, 1) == (-10, -1)
+    assert _rotate('L', 270, 10, 1) == (1, -10)
+    assert _rotate('R', 270, 10, 1) == (-1, 10)
 
 
 def _rotate(turn, degrees, x, y):
@@ -25,8 +25,8 @@ def _rotate_ninety(turn, x, y):
 
 
 def test_move_by_compass_direction():
-    assert (0, 1) == _move_by_compass_direction('N', 1, 0, 0)
-    assert (-1, 0) == _move_by_compass_direction('W', 1, 0, 0)
+    assert _move_by_compass_direction('N', 1, 0, 0) == (0, 1)
+    assert _move_by_compass_direction('W', 1, 0, 0) == (-1, 0)
 
 
 def _move_by_compass_direction(direction, value, x, y):
@@ -40,8 +40,8 @@ def _move_by_compass_direction(direction, value, x, y):
 
 
 def test_task_one():
-    assert 25 == task_one('test-data.txt')
-    assert 1294 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 25
+    assert task_one('real-data.txt') == 1294
 
 
 def task_one(filename):
@@ -61,8 +61,8 @@ def task_one(filename):
 
 
 def test_task_two():
-    assert 286 == task_two('test-data.txt')
-    assert 20592 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 286
+    assert task_two('real-data.txt') == 20592
 
 
 def task_two(filename):

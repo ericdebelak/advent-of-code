@@ -2,8 +2,8 @@ from copy import copy
 
 
 def test_task_one():
-    assert 165 == task_one('test-data.txt')
-    assert 12512013221615 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 165
+    assert task_one('real-data.txt') == 12512013221615
 
 
 def task_one(filename):
@@ -49,7 +49,7 @@ def _get_modifier(index):
 
 
 def test_get_indexes_for_x():
-    assert [0, 5] == _get_indexes_for_x('000000000000000000000000000000X1001X')
+    assert _get_indexes_for_x('000000000000000000000000000000X1001X') == [0, 5]
 
 
 def _get_indexes_for_x(mask):
@@ -58,12 +58,12 @@ def _get_indexes_for_x(mask):
 
 
 def test_add_mem_permutations():
-    assert {
+    assert _add_mem_permutations('000000000000000000000000000000X1001X', '000000000000000000000000000000011010', 100, {}) == {
         26: 100,
         27: 100,
         58: 100,
         59: 100
-    } == _add_mem_permutations('000000000000000000000000000000X1001X', '000000000000000000000000000000011010', 100, {})
+    }
 
 
 def _add_mem_permutations(mask, binary_string_with_0, mem_value, mem):
@@ -82,8 +82,8 @@ def _add_mem_permutations(mask, binary_string_with_0, mem_value, mem):
 
 
 def test_task_two():
-    assert 208 == task_two('test-data-two.txt')
-    assert 3905642473893 == task_two('real-data.txt')
+    assert task_two('test-data-two.txt') == 208
+    assert task_two('real-data.txt') == 3905642473893
 
 
 def task_two(filename):

@@ -13,9 +13,9 @@ def test_get_count_adjacent():
         [OCCUPIED, EMPTY, EMPTY],
         [FLOOR, OCCUPIED, EMPTY],
     ]
-    assert 3 == _count_adjacent(rows, 1, 1)
-    assert 2 == _count_adjacent(rows, 1, 2)
-    assert 1 == _count_adjacent(rows, 2, 2)
+    assert _count_adjacent(rows, 1, 1) == 3
+    assert _count_adjacent(rows, 1, 2) == 2
+    assert _count_adjacent(rows, 2, 2) == 1
 
 
 def _count_adjacent(rows, row_index, column_index):
@@ -60,8 +60,8 @@ def _update_row(row, column_index, new_string):
 
 
 def test_task_one():
-    assert 37 == task_one('test-data.txt')
-    assert 2178 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 37
+    assert task_one('real-data.txt') == 2178
 
 
 def task_one(filename):
@@ -84,13 +84,13 @@ def test_count_adjacent_two():
         '#........',
         '...#.....'
     ]
-    assert 8 == _count_adjacent_two(rows, 4, 3)
+    assert _count_adjacent_two(rows, 4, 3) == 8
     rows = [
         '.............',
         '.L.L.#.#.#.#.',
         '.............'
     ]
-    assert 0 == _count_adjacent_two(rows, 1, 1)
+    assert _count_adjacent_two(rows, 1, 1) == 0
     rows = [
         '.##.##.',
         '#.#.#.#',
@@ -100,7 +100,7 @@ def test_count_adjacent_two():
         '#.#.#.#',
         '.##.##.'
     ]
-    assert 0 == _count_adjacent_two(rows, 3, 3)
+    assert _count_adjacent_two(rows, 3, 3) == 0
 
 
 def _count_adjacent_two(rows, row_index, column_index):
@@ -127,8 +127,8 @@ def _count_adjacent_two(rows, row_index, column_index):
 
 
 def test_task_two():
-    assert 26 == task_two('test-data.txt')
-    assert 1978 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 26
+    assert task_two('real-data.txt') == 1978
 
 
 def task_two(filename):

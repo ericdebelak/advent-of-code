@@ -5,8 +5,8 @@ def _parse_line(line):
 
 
 def test_task_one():
-    assert 2 == task_one('test-data.txt')
-    assert 564 == task_one('real-data.txt')
+    assert task_one('test-data.txt') == 2
+    assert task_one('real-data.txt') == 564
 
 
 def task_one(filename):
@@ -19,8 +19,8 @@ def task_one(filename):
 
 
 def test_task_two():
-    assert 1 == task_two('test-data.txt')
-    assert 325 == task_two('real-data.txt')
+    assert task_two('test-data.txt') == 1
+    assert task_two('real-data.txt') == 325
 
 
 def task_two(filename):

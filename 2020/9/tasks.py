@@ -2,8 +2,8 @@ from copy import copy
 
 
 def test_task_one():
-    assert 127 == task_one('test-data.txt', 5)
-    assert 248131121 == task_one('real-data.txt', 25)
+    assert task_one('test-data.txt', 5) == 127
+    assert task_one('real-data.txt', 25) == 248131121
 
 
 def task_one(filename, preamble):
@@ -19,7 +19,7 @@ def task_one(filename, preamble):
 
 def test_check_for_match_with_match():
     lines = [35, 20, 15, 25, 47]
-    assert 40 == _check_for_match(lines, 40)
+    assert _check_for_match(lines, 40) == 40
 
 
 def test_check_for_match_no_match():
@@ -37,7 +37,7 @@ def _check_for_match(lines, match):
 
 def test_check_for_low_high():
     lines = [35, 20, 15, 25, 47, 40, 62]
-    assert 62 == _check_for_low_high(lines, 127)
+    assert _check_for_low_high(lines, 127) == 62
 
 
 def _check_for_low_high(lines, match):
@@ -57,8 +57,8 @@ def _check_for_low_high(lines, match):
 
 
 def test_task_two():
-    assert 62 == task_two('test-data.txt', 5)
-    assert 31580383 == task_two('real-data.txt', 25)
+    assert task_two('test-data.txt', 5) == 62
+    assert task_two('real-data.txt', 25) == 31580383
 
 
 def task_two(filename, preamble):
