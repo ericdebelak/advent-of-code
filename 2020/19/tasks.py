@@ -13,19 +13,16 @@ def _build_rule_graph_and_messages(file):
 
 def test_parse_rule():
     rules_graph = {
-        '0': '1 2',
-        '1': '3',
+        '1': '2 2 | 2 3',
         '2': 'a',
         '3': 'b'
     }
     rules_parsed = {
-        '1': 'b',
         '2': 'a',
         '3': 'b'
     }
-    assert _parse_rule(rules_graph, rules_parsed, '0') == {
-        '0': 'ba',
-        '1': 'b',
+    assert _parse_rule(rules_graph, rules_parsed, '1') == {
+        '1': '(aa|ab)',
         '2': 'a',
         '3': 'b'
     }
