@@ -15,8 +15,8 @@ def _play_game(decks):
         else:
             decks[1].append(decks[1][0])
             decks[1].append(decks[0][0])
-        decks[0] = decks[0][1:] if len(decks[0]) > 1 else []
-        decks[1] = decks[1][1:] if len(decks[1]) > 1 else []
+        decks[0] = decks[0][1:]
+        decks[1] = decks[1][1:]
     return decks
 
 
