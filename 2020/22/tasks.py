@@ -1,3 +1,6 @@
+from copy import copy
+
+
 def _parse_decks(file):
     decks = []
     groups = file.read().split('\n\n')
@@ -38,14 +41,12 @@ def task_one(filename):
 
 
 def _play_game_recursive(decks):
-    previous_rounds_one = []
-    previous_rounds_two = []
+    previous_rounds = []
     while len(decks[0]) != 0 and len(decks[1]) != 0:
-        if decks[0] in previous_rounds_one and decks[1] in previous_rounds_two:
+        if [decks[0], decks[1]] in previous_rounds:
             # player one wins the game
             return [[1], []]
-        previous_rounds_one.append(decks[0][:])
-        previous_rounds_two.append(decks[1][:])
+        previous_rounds.append([copy(decks[0]), copy(decks[1])])
         if decks[0][0] < len(decks[0]) and decks[1][0] < len(decks[1]):
             new_decks = _play_game_recursive([decks[0][1:(decks[0][0] + 1)], decks[1][1:(decks[1][0] + 1)]])
             if len(new_decks[0]) > len(new_decks[1]):
