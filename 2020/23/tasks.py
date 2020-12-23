@@ -8,7 +8,6 @@ def test_task_one():
 
 def task_one(cups):
     cups = deque(int(x) for x in cups)
-    highest_cup = max(cups)
     for _ in range(100):
         current = cups[0]
         # shift list so current is at the end
