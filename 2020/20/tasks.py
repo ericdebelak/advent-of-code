@@ -138,9 +138,11 @@ def _assemble_image(tile_transformations, side_length):
                     left_matches = all(transformation[i][0] == left_tile[i][9] for i in range(10))
                 if up_matches and left_matches:
                     image_matrix[row][column] = (tile_id, i)
+                    # remove the tile from remaining and keep running it
                     remaining_tiles.remove(tile_id)
                     if _assemble_tiles(row_column + 1):
                         return True
+                    # if the whole image doesn't match, add back the tiles and try again
                     remaining_tiles.add(tile_id)
         return False
 
