@@ -1,5 +1,6 @@
 import re
 from math import prod, sqrt
+from copy import deepcopy
 
 
 def _parse_tiles(file):
@@ -11,6 +12,7 @@ def _parse_tiles(file):
         tile_id = re.findall(r'(\d+)', lines[0])[0]
         tiles[tile_id] = _find_all_sides(lines[1:])
         all_sides += tiles[tile_id]
+    file.seek(0)
     return tiles, all_sides
 
 
@@ -91,14 +93,19 @@ def test_task_one():
     assert task_one('real-data.txt') == 15006909892229
 
 
+def _get_corners(file):
+    tiles, all_sides = _parse_tiles(file)
+    corners = []
+    for tile_id, tile in tiles.items():
+        # corners with have all their side possibilities match, plus 2 and their reverses, so 12 matches
+        if _find_matches(tile, all_sides) == 12:
+            corners.append(int(tile_id))
+    return corners
+
+
 def task_one(filename):
     with open(filename, 'r') as file:
-        tiles, all_sides = _parse_tiles(file)
-        corners = []
-        for tile_id, tile in tiles.items():
-            # corners with have all their side possibilities match, plus 2 and their reverses, so 12 matches
-            if _find_matches(tile, all_sides) == 12:
-                corners.append(int(tile_id))
+        corners = _get_corners(file)
         return prod(corners)
 
 
@@ -117,38 +124,52 @@ def _build_tile_transformations(tile):
     return [tile, tile90, tile180, tile270, _flip(tile), _flip(tile90), _flip(tile180), _flip(tile270)]
 
 
-def _assemble_image(tile_transformations, side_length):
+def _assemble_image(tile_transformations, side_length, starting_corner_id):
     image_matrix = [[(0, 0)] * side_length for _ in range(side_length)]
     remaining_tiles = set(tile_transformations.keys())
+    # remove the corner from the remaining tiles
+    remaining_tiles.remove(starting_corner_id)
+    # try every rotation of the starting corner
+    for i, corner_transformation in enumerate(tile_transformations[starting_corner_id]):
+        # add the starting corner to the image with the current transformation
+        image_matrix[0][0] = (starting_corner_id, i)
+        # try to add all the tiles
+        result = _assemble_tiles(tile_transformations, side_length, remaining_tiles, image_matrix)
+        if result:
+            return result
 
-    def _assemble_tiles(row_column):
-        if row_column == side_length * side_length:
-            return True
-        row, column = row_column // side_length, row_column % side_length
+
+def _assemble_tiles(tile_transformations, side_length, tiles, image_matrix):
+    next_row = 0
+    next_column = 1
+    num_iterations = 0
+    remaining_tiles = deepcopy(tiles)
+    while remaining_tiles and num_iterations < (side_length ** 4) / 2:  # break condition for all possible iterations
         for tile_id in list(remaining_tiles):
             for i, transformation in enumerate(tile_transformations[tile_id]):
                 up_matches = left_matches = True
-                if row > 0:
-                    up_tile_id, up_transformation = image_matrix[row - 1][column]
+                if next_row > 0:
+                    up_tile_id, up_transformation = image_matrix[next_row - 1][next_column]
                     up_tile = tile_transformations[up_tile_id][up_transformation]
                     up_matches = all(transformation[0][i] == up_tile[9][i] for i in range(10))
-                if column > 0:
-                    left_tile_id, left_transformation = image_matrix[row][column - 1]
+                if next_column > 0:
+                    left_tile_id, left_transformation = image_matrix[next_row][next_column - 1]
                     left_tile = tile_transformations[left_tile_id][left_transformation]
                     left_matches = all(transformation[i][0] == left_tile[i][9] for i in range(10))
                 if up_matches and left_matches:
-                    image_matrix[row][column] = (tile_id, i)
-                    # remove the tile from remaining and keep running it
+                    image_matrix[next_row][next_column] = (tile_id, i)
+                    if next_column + 1 < side_length:
+                        next_column += 1
+                    else:
+                        next_column = 0
+                        if next_row + 1 < side_length:
+                            next_row += 1
+
+                    # remove the tile from remaining and keep running it from the next tile
                     remaining_tiles.remove(tile_id)
-                    if _assemble_tiles(row_column + 1):
-                        return True
-                    # if the whole image doesn't match, add back the tiles and try again
-                    remaining_tiles.add(tile_id)
-        return False
-
-    _assemble_tiles(0)
-
-    return image_matrix
+                    break
+            num_iterations += 1
+    return False if remaining_tiles else image_matrix
 
 
 def _parse_tiles_two(file):
@@ -167,13 +188,15 @@ def test_task_two():
 
 def task_two(filename):
     with open(filename, 'r') as file:
+        # start with a corner
+        corners = _get_corners(file)
         tiles = _parse_tiles_two(file)
         # build every possible tile orientation
         tile_transformations = {tile_id: _build_tile_transformations(tile) for tile_id, tile in tiles.items()}
         # figure out the size of the image
         side_length = int(sqrt(len(tile_transformations)))
         # build the image with the tile id and transformation index
-        tile_matrix = _assemble_image(tile_transformations, side_length)
+        tile_matrix = _assemble_image(tile_transformations, side_length, corners[0])
         # get position of monster
         monster_pattern = [
             '                  # ',
