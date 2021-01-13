@@ -39,12 +39,8 @@ def test_build_graph():
 
 
 def _build_graph(adapters):
-    graph = {}
-    for adapter in adapters:
-        # get a list of all potential children adapters (+1, 2 or 3)
-        # if they are in our adapters list, add them to the graph
-        graph[adapter] = [adapter + x for x in [1, 2, 3] if adapter + x in adapters]
-    return graph
+    # get a list of all potential children adapters (+1, 2 or 3) if they are in our adapters list
+    return {adapter: [adapter + x for x in [1, 2, 3] if adapter + x in adapters] for adapter in adapters}
 
 
 def test_count_paths():
