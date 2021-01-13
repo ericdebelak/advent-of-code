@@ -1,13 +1,10 @@
 def _make_moves(initial_cups, rounds):
     # key is cup, value is next cup
-    cups = {}
-    for index, cup in enumerate(initial_cups):
-        if index < len(initial_cups) - 1:
-            # add the next cup
-            cups[cup] = initial_cups[index + 1]
-        else:
-            # end of list, add the first cup
-            cups[cup] = initial_cups[0]
+    cups = {
+        # add then next cup or if at the end of list, add the first cup
+        cup: initial_cups[index + 1] if index < len(initial_cups) - 1 else initial_cups[0]
+        for index, cup in enumerate(initial_cups)
+    }
 
     current = initial_cups[0]
 
